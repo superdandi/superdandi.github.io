@@ -17,9 +17,12 @@ const SOCIAL_LINKS = [
 ] as const;
 
 const PROJECTS = [
-  { name: "super-ffmpeg-stream", desc: "ffmpeg wrapper for streaming", lang: "C" },
-  { name: "pungafighters", desc: "2D fighting game engine", lang: "Rust" },
-  { name: "fxprimavera", desc: "audio DSP plugin suite", lang: "C++" },
+  { name: "INFOCOB", desc: "diseño & desarrollo digital — web, IA y productos digitales", lang: "WEB", href: "https://superdandi.github.io/infocob/" },
+  { name: "SABIOS", desc: "pizzería artesanal Talca — pizza por pedazos y completos", lang: "WEB", href: "https://superdandi.github.io/sabios/" },
+  { name: "VIZCOSO", desc: "abarrotes Talca — delivery y tienda online", lang: "WEB", href: "https://superdandi.github.io/vizcoso/" },
+  { name: "super-ffmpeg-stream", desc: "ffmpeg wrapper for streaming", lang: "C", href: "https://github.com/superdandi/super-ffmpeg-stream" },
+  { name: "pungafighters", desc: "2D fighting game engine", lang: "Rust", href: "https://github.com/superdandi/pungafighters" },
+  { name: "fxprimavera", desc: "audio DSP plugin suite", lang: "C++", href: "https://github.com/superdandi/fxprimavera" },
 ];
 
 export default function Home() {
@@ -157,9 +160,12 @@ export default function Home() {
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {PROJECTS.map((project) => (
-              <div
+              <a
                 key={project.name}
-                className="border border-[var(--text-dim)]/20 rounded p-4 
+                href={project.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block border border-[var(--text-dim)]/20 rounded p-4 
                   transition-all duration-300 hover:glow-border-cyan hover:scale-[1.02] 
                   bg-[var(--dark-card)]/50 backdrop-blur"
               >
@@ -172,7 +178,7 @@ export default function Home() {
                 <div className="text-[var(--neon-green)] text-[10px] font-mono">
                   [{project.lang}]
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </section>
