@@ -17,6 +17,7 @@ const SOCIAL_LINKS = [
 ] as const;
 
 const PROJECTS = [
+  { name: "WARZINE", desc: "beat 'em up de tinta negra / fanzine punk — 2P local, 3 niveles, jefes", lang: "JS", href: "https://superdandi.github.io/warzine/" },
   { name: "INFOCOB", desc: "diseño & desarrollo digital — web, IA y productos digitales", lang: "WEB", href: "https://superdandi.github.io/infocob/" },
   { name: "SABIOS", desc: "pizzería artesanal Talca — pizza por pedazos y completos", lang: "WEB", href: "https://superdandi.github.io/sabios/" },
   { name: "VIZCOSO", desc: "abarrotes Talca — delivery y tienda online", lang: "WEB", href: "https://superdandi.github.io/vizcoso/" },
