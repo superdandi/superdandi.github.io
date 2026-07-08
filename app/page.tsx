@@ -17,13 +17,16 @@ const SOCIAL_LINKS = [
 ] as const;
 
 const PROJECTS = [
-  { name: "WARZINE", desc: "beat 'em up de tinta negra / fanzine punk — 2P local, 3 niveles, jefes", lang: "JS", href: "https://superdandi.github.io/warzine/" },
-  { name: "INFOCOB", desc: "diseño & desarrollo digital — web, IA y productos digitales", lang: "WEB", href: "https://superdandi.github.io/infocob/" },
-  { name: "SABIOS", desc: "pizzería artesanal Talca — pizza por pedazos y completos", lang: "WEB", href: "https://superdandi.github.io/sabios/" },
-  { name: "VIZCOSO", desc: "abarrotes Talca — delivery y tienda online", lang: "WEB", href: "https://superdandi.github.io/vizcoso/" },
-  { name: "super-ffmpeg-stream", desc: "ffmpeg wrapper for streaming", lang: "C", href: "https://github.com/superdandi/super-ffmpeg-stream" },
-  { name: "pungafighters", desc: "2D fighting game engine", lang: "Rust", href: "https://github.com/superdandi/pungafighters" },
-  { name: "fxprimavera", desc: "audio DSP plugin suite", lang: "C++", href: "https://github.com/superdandi/fxprimavera" },
+  { name: "warzine", desc: "beat 'em up / fanzine punk — 2P local, 3 niveles, jefes", lang: "JS", href: "https://superdandi.github.io/warzine/" },
+  { name: "infocob", desc: "diseño & desarrollo digital — web, IA y productos digitales", lang: "WEB", href: "https://superdandi.github.io/infocob/" },
+  { name: "sabios", desc: "pizzería artesanal Talca — pizza por pedazos y completos", lang: "WEB", href: "https://superdandi.github.io/sabios/" },
+  { name: "vizcoso", desc: "abarrotes Talca — delivery y tienda online", lang: "WEB", href: "https://superdandi.github.io/vizcoso/" },
+  { name: "pungafighters", desc: "2D fighting game engine & framework", lang: "TypeScript", href: "https://github.com/superdandi/pungafighters" },
+  { name: "capture-button", desc: "audio capture & signal processing", lang: "C++", href: "https://github.com/superdandi/capture-button" },
+  { name: "tapizate", desc: "web tapestry / UI experiments", lang: "CSS", href: "https://github.com/superdandi/tapizate" },
+  { name: "super-ffmpeg-stream", desc: "ffmpeg streaming toolkit", lang: "Shell", href: "https://github.com/superdandi/super-ffmpeg-stream" },
+  { name: "fxprimavera", desc: "audio DSP plugin suite", lang: "JavaScript", href: "https://github.com/superdandi/fxprimavera" },
+  { name: "energy-awareness-skill", desc: "LLM energy estimation skill for OpenCode", lang: "Shell", href: "https://github.com/superdandi/energy-awareness-skill" },
 ];
 
 export default function Home() {
@@ -119,7 +122,7 @@ export default function Home() {
               <span className="text-[var(--neon-yellow)]">pixel artist</span>
             </p>
             <p className="text-xs text-[var(--text-dim)] mt-2 font-mono">
-              crafting code at the intersection of sound and light
+              crafting code across the full stack — from audio DSP to pixel art
             </p>
           </div>
         </section>
@@ -166,9 +169,9 @@ export default function Home() {
                 href={project.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block border border-[var(--text-dim)]/20 rounded p-4 
+                className="border border-[var(--text-dim)]/20 rounded p-4 
                   transition-all duration-300 hover:glow-border-cyan hover:scale-[1.02] 
-                  bg-[var(--dark-card)]/50 backdrop-blur"
+                  bg-[var(--dark-card)]/50 backdrop-blur block"
               >
                 <div className="text-[var(--neon-cyan)] font-mono text-sm font-bold mb-1 truncate">
                   {project.name}
