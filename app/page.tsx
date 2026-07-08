@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import VisitorCounter from "@/app/components/VisitorCounter";
 import HologramCard from "@/app/components/HologramCard";
 import CineSection from "@/app/components/CineSection";
-import HudCorners from "@/app/components/HudCorners";
 
 const ASCII_ART = `
   ███████╗██╗   ██╗██████╗ ███████╗██████╗ ██████╗  █████╗ ███╗   ██╗██████╗ ██╗
@@ -252,7 +251,6 @@ export default function Home() {
                     borderLeftWidth: "3px",
                   }}
                 >
-                  <HudCorners />
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-[var(--neon-yellow)] font-mono text-xs font-bold">
                       [{entry.year}]
@@ -284,7 +282,6 @@ export default function Home() {
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="glass-card border border-[var(--neon-cyan)]/20 rounded p-4 relative">
-                <HudCorners />
                 <div className="text-[var(--neon-cyan)] font-mono text-xs font-bold mb-3 uppercase tracking-widest">
                   MODERN TIER
                 </div>
@@ -300,7 +297,6 @@ export default function Home() {
                 </div>
               </div>
               <div className="glass-card border border-[var(--neon-green)]/20 rounded p-4 relative">
-                <HudCorners />
                 <div className="text-[var(--neon-green)] font-mono text-xs font-bold mb-3 uppercase tracking-widest">
                   LEGACY TIER
                 </div>
@@ -338,7 +334,6 @@ export default function Home() {
                   className="glass-card border border-[var(--neon-cyan)]/15 rounded p-4 
                     transition-all duration-300 hover:scale-[1.02] relative block"
                 >
-                  <HudCorners />
                   <div className="text-[var(--neon-cyan)] font-mono text-sm font-bold mb-1 truncate">
                     {project.name}
                   </div>
@@ -380,7 +375,6 @@ export default function Home() {
             </div>
             <div className="glass-card border border-[var(--neon-cyan)]/20 rounded p-6 relative
               animate-glow-pulse-green text-center space-y-4">
-              <HudCorners />
               <div className="flex flex-wrap justify-center gap-4">
                 {SOCIAL_LINKS.map((link) => (
                   <a
