@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import VisitorCounter from "@/app/components/VisitorCounter";
 import HologramCard from "@/app/components/HologramCard";
 import CineSection from "@/app/components/CineSection";
+import HudCorners from "@/app/components/HudCorners";
 
 const ASCII_ART = `
   ███████╗██╗   ██╗██████╗ ███████╗██████╗ ██████╗  █████╗ ███╗   ██╗██████╗ ██╗
@@ -212,14 +213,14 @@ export default function Home() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`px-5 py-2 border rounded text-sm font-mono transition-all duration-300 
+                  className={`glass-card border rounded px-5 py-2 text-sm font-mono transition-all duration-300 
                     hover:scale-105 link-underline
                     ${
                       link.color === "cyan"
-                        ? "border-[var(--neon-cyan)] text-[var(--neon-cyan)] hover:bg-[var(--neon-cyan)]/10"
+                        ? "border-[var(--neon-cyan)]/30 text-[var(--neon-cyan)]"
                         : link.color === "magenta"
-                        ? "border-[var(--neon-magenta)] text-[var(--neon-magenta)] hover:bg-[var(--neon-magenta)]/10"
-                        : "border-[var(--neon-yellow)] text-[var(--neon-yellow)] hover:bg-[var(--neon-yellow)]/10"
+                        ? "border-[var(--neon-magenta)]/30 text-[var(--neon-magenta)]"
+                        : "border-[var(--neon-yellow)]/30 text-[var(--neon-yellow)]"
                     }`}
                 >
                   {`[ ${link.label} ]`}
@@ -242,15 +243,16 @@ export default function Home() {
               {CAREER_LOG.map((entry, i) => (
                 <div
                   key={i}
-                  className={`log-entry border border-[var(--text-dim)]/15 rounded p-4 
-                    bg-[var(--dark-card)]/40 backdrop-blur
+                  className={`log-entry glass-card border rounded p-4 relative
                     ${visibleLogs.includes(i) ? "opacity-100" : "opacity-0"}`}
                   style={{
+                    borderColor: "rgba(18, 18, 26, 0.6)",
                     borderLeftColor:
                       i === 2 ? "var(--neon-cyan)" : "var(--neon-green)",
                     borderLeftWidth: "3px",
                   }}
                 >
+                  <HudCorners />
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-[var(--neon-yellow)] font-mono text-xs font-bold">
                       [{entry.year}]
@@ -281,7 +283,8 @@ export default function Home() {
               </span>
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
-              <div className="border border-[var(--neon-cyan)]/20 rounded p-4 bg-[var(--dark-card)]/40">
+              <div className="glass-card border border-[var(--neon-cyan)]/20 rounded p-4 relative">
+                <HudCorners />
                 <div className="text-[var(--neon-cyan)] font-mono text-xs font-bold mb-3 uppercase tracking-widest">
                   MODERN TIER
                 </div>
@@ -296,7 +299,8 @@ export default function Home() {
                   ))}
                 </div>
               </div>
-              <div className="border border-[var(--neon-green)]/20 rounded p-4 bg-[var(--dark-card)]/40">
+              <div className="glass-card border border-[var(--neon-green)]/20 rounded p-4 relative">
+                <HudCorners />
                 <div className="text-[var(--neon-green)] font-mono text-xs font-bold mb-3 uppercase tracking-widest">
                   LEGACY TIER
                 </div>
@@ -331,10 +335,10 @@ export default function Home() {
                   href={project.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border border-[var(--text-dim)]/20 rounded p-4 
-                    transition-all duration-300 hover:glow-border-cyan hover:scale-[1.02] 
-                    bg-[var(--dark-card)]/50 backdrop-blur block"
+                  className="glass-card border border-[var(--neon-cyan)]/15 rounded p-4 
+                    transition-all duration-300 hover:scale-[1.02] relative block"
                 >
+                  <HudCorners />
                   <div className="text-[var(--neon-cyan)] font-mono text-sm font-bold mb-1 truncate">
                     {project.name}
                   </div>
@@ -374,8 +378,9 @@ export default function Home() {
                 ./contact.sh --available
               </span>
             </div>
-            <div className="border border-[var(--neon-cyan)]/20 rounded p-6 bg-[var(--dark-card)]/40
+            <div className="glass-card border border-[var(--neon-cyan)]/20 rounded p-6 relative
               animate-glow-pulse-green text-center space-y-4">
+              <HudCorners />
               <div className="flex flex-wrap justify-center gap-4">
                 {SOCIAL_LINKS.map((link) => (
                   <a
@@ -383,14 +388,14 @@ export default function Home() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`px-4 py-2 border rounded text-xs font-mono transition-all duration-300 
+                    className={`glass-card border rounded px-4 py-2 text-xs font-mono transition-all duration-300 
                       hover:scale-105 link-underline
                       ${
                         link.color === "cyan"
-                          ? "border-[var(--neon-cyan)] text-[var(--neon-cyan)] hover:bg-[var(--neon-cyan)]/10"
+                          ? "border-[var(--neon-cyan)]/30 text-[var(--neon-cyan)]"
                           : link.color === "magenta"
-                          ? "border-[var(--neon-magenta)] text-[var(--neon-magenta)] hover:bg-[var(--neon-magenta)]/10"
-                          : "border-[var(--neon-yellow)] text-[var(--neon-yellow)] hover:bg-[var(--neon-yellow)]/10"
+                          ? "border-[var(--neon-magenta)]/30 text-[var(--neon-magenta)]"
+                          : "border-[var(--neon-yellow)]/30 text-[var(--neon-yellow)]"
                       }`}
                   >
                     {`[ ${link.label} ]`}
