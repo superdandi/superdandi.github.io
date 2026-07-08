@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import VisitorCounter from "@/app/components/VisitorCounter";
 
 const ASCII_ART = `
   ███████╗██╗   ██╗██████╗ ███████╗██████╗ ██████╗  █████╗ ███╗   ██╗██████╗ ██╗
@@ -191,28 +192,11 @@ export default function Home() {
           <div className="flex items-center gap-2 mb-4">
             <span className="text-[var(--neon-cyan)] text-sm font-mono">$</span>
             <span className="text-[var(--neon-green)] text-xs font-mono">
-              uptime
+              cat /sys/network/counter
             </span>
           </div>
-          <div className="border border-[var(--text-dim)]/20 rounded p-4 bg-[var(--dark-card)]/50">
-            <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs font-mono">
-              <span>
-                status:{" "}
-                <span className="text-[var(--neon-green)]">online</span>
-              </span>
-              <span>
-                location:{" "}
-                <span className="text-[var(--neon-cyan)]">[REDACTED]</span>
-              </span>
-              <span>
-                shell:{" "}
-                <span className="text-[var(--neon-magenta)]">/bin/zsh</span>
-              </span>
-              <span>
-                editor:{" "}
-                <span className="text-[var(--neon-yellow)]">neovim</span>
-              </span>
-            </div>
+          <div className="flex justify-center">
+            <VisitorCounter />
           </div>
         </section>
 
