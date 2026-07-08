@@ -167,8 +167,11 @@ export default function Home() {
 
             <div className="space-y-3">
               <h1 className="text-2xl sm:text-4xl font-bold text-[var(--neon-cyan)] text-shadow-cyan typing inline-block">
-                superdandi
+                Daniel Cobos
               </h1>
+              <div className="text-[11px] font-mono text-[var(--neon-cyan)]/50 tracking-widest -mt-1">
+                aka superdandi
+              </div>
               <div className="max-w-xl mx-auto space-y-1">
                 <p className="text-sm sm:text-base text-[var(--text-dim)] font-mono leading-relaxed">
                   <span className="text-[var(--neon-green)]">full-stack developer</span>

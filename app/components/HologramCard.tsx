@@ -112,10 +112,12 @@ export default function HologramCard() {
                 transition: "all 0.05s",
               }}
             >
-              superdandi
+              Daniel Cobos
             </div>
-            <div className="text-[10px] font-mono text-[var(--neon-cyan)]/70">
-              ID: LEGACY_ARCHITECT
+            <div className="text-[10px] font-mono text-[var(--neon-cyan)]/70 space-x-2">
+              <span>ID: LEGACY_ARCHITECT</span>
+              <span className="text-[var(--neon-green)]/50">{"/"}{"/"}</span>
+              <span className="text-[var(--neon-cyan)]/50">superdandi</span>
             </div>
             <div className="flex items-center justify-center gap-2 mt-1">
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-[var(--neon-green)] animate-pulse" />
