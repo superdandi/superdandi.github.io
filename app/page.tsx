@@ -24,7 +24,7 @@ const PROJECTS = [
   { name: "warzine", desc: "beat 'em up / fanzine punk — 2P local, 3 niveles, jefes", lang: "JS", href: "https://superdandi.github.io/warzine/" },
   { name: "infocob", desc: "diseño & desarrollo digital — web, IA y productos digitales", lang: "WEB", href: "https://superdandi.github.io/infocob/" },
   { name: "sabios", desc: "pizzería artesanal Talca — pizza por pedazos y completos", lang: "WEB", href: "https://superdandi.github.io/sabios/" },
-  { name: "vizcoso", desc: "abarrotes Talca — delivery y tienda online", lang: "WEB", href: "https://superdandi.github.io/vizcoso/" },
+  { name: "vizcoso", desc: "Vizcoso Entertainment — estudio de grabación & productora", lang: "WEB", href: "https://superdandi.github.io/vizcoso/" },
   { name: "pungafighters", desc: "2D fighting game engine & framework", lang: "TypeScript", href: "https://github.com/superdandi/pungafighters" },
   { name: "capture-button", desc: "audio capture & signal processing", lang: "C++", href: "https://github.com/superdandi/capture-button" },
   { name: "tapizate", desc: "web tapestry / UI experiments", lang: "CSS", href: "https://github.com/superdandi/tapizate" },
