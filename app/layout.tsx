@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import RainCanvas from "@/app/components/RainCanvas";
+import Cityscape from "@/app/components/Cityscape";
+import VHSGlitch from "@/app/components/VHSGlitch";
+import AmbientAudio from "@/app/components/AmbientAudio";
 
 export const metadata: Metadata = {
   title: "superdandi · full-stack · legacy systems specialist",
@@ -42,7 +46,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased scanlines crt flicker grid-bg">
-        {children}
+        {/* Cinematic layers */}
+        <RainCanvas />
+        <Cityscape />
+        <VHSGlitch />
+        <AmbientAudio />
+        {/* Main content */}
+        <div className="relative" style={{ zIndex: 10 }}>
+          {children}
+        </div>
       </body>
     </html>
   );
