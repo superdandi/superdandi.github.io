@@ -39,18 +39,18 @@ export default function RainCanvas() {
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // On mobile, reduce density
+    // MAXIMALIST: tripled density
     const isMobile = w < 768;
-    const dropCount = prefersReduced ? 30 : isMobile ? 80 : 180;
+    const dropCount = prefersReduced ? 30 : isMobile ? 150 : 400;
 
     // Initialize drops
     dropsRef.current = Array.from({ length: dropCount }, () => ({
       x: Math.random() * w,
       y: Math.random() * h,
-      speed: 4 + Math.random() * 8,
-      length: 10 + Math.random() * 20,
-      opacity: 0.15 + Math.random() * 0.25,
-      wind: -0.3 + Math.random() * 0.6,
+      speed: 6 + Math.random() * 14,
+      length: 15 + Math.random() * 30,
+      opacity: 0.25 + Math.random() * 0.35,
+      wind: -0.4 + Math.random() * 0.8,
     }));
 
     const handleResize = () => {
@@ -86,20 +86,20 @@ export default function RainCanvas() {
       }
       trailsRef.current = trailsRef.current.filter((t) => t.life > 0);
 
-      // Spawn new trails occasionally
-      if (Math.random() < 0.03 && trailsRef.current.length < 30) {
+      // Spawn new trails — MAXIMALIST: more frequent, longer
+      if (Math.random() < 0.08 && trailsRef.current.length < 60) {
         trailsRef.current.push({
           x: Math.random() * w,
           y: Math.random() * h * 0.5,
-          life: 60 + Math.random() * 120,
-          maxLife: 180,
+          life: 100 + Math.random() * 200,
+          maxLife: 300,
         });
       }
 
-      // Draw rain
+      // Draw rain — MAXIMALIST: wider strokes, more visible
       for (const drop of dropsRef.current) {
         ctx.strokeStyle = `rgba(150, 200, 255, ${drop.opacity})`;
-        ctx.lineWidth = 1;
+        ctx.lineWidth = 1.5;
         ctx.beginPath();
         ctx.moveTo(drop.x, drop.y);
         ctx.lineTo(drop.x + drop.wind * 3, drop.y + drop.length);
@@ -117,11 +117,11 @@ export default function RainCanvas() {
         if (drop.x < -10) drop.x = w + 10;
       }
 
-      // Lightning
+      // Lightning — MAXIMALIST: more frequent, brighter
       lightningTimerRef.current--;
-      if (lightningTimerRef.current <= 0 && Math.random() < 0.005) {
-        flashRef.current = 0.6 + Math.random() * 0.4;
-        lightningTimerRef.current = 200 + Math.random() * 400;
+      if (lightningTimerRef.current <= 0 && Math.random() < 0.02) {
+        flashRef.current = 0.8 + Math.random() * 0.5;
+        lightningTimerRef.current = 100 + Math.random() * 200;
       }
 
       animRef.current = requestAnimationFrame(draw);
@@ -142,7 +142,7 @@ export default function RainCanvas() {
       ref={canvasRef}
       aria-hidden="true"
       className="fixed inset-0 w-full h-full pointer-events-none"
-      style={{ zIndex: 0, opacity: 0.7 }}
+      style={{ zIndex: 0, opacity: 1 }}
     />
   );
 }

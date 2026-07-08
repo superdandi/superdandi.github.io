@@ -12,10 +12,12 @@ interface NeonGlow {
 }
 
 const COLORS = [
-  "rgba(0, 243, 255, 0.08)",   // cyan
-  "rgba(255, 0, 255, 0.06)",   // magenta
-  "rgba(255, 180, 50, 0.05)",  // amber
-  "rgba(0, 255, 65, 0.04)",    // green
+  "rgba(0, 243, 255, 0.15)",   // cyan
+  "rgba(255, 0, 255, 0.12)",   // magenta
+  "rgba(255, 180, 50, 0.10)",  // amber
+  "rgba(0, 255, 65, 0.09)",    // green
+  "rgba(255, 50, 100, 0.08)",  // hot pink
+  "rgba(120, 50, 255, 0.10)",  // purple
 ];
 
 export default function Cityscape() {
@@ -34,13 +36,13 @@ export default function Cityscape() {
     canvas.width = w;
     canvas.height = h;
 
-    // Initialize neon glows
-    glowsRef.current = Array.from({ length: 12 }, () => ({
+    // Initialize neon glows — MAXIMALIST: triple count, larger, brighter
+    glowsRef.current = Array.from({ length: 40 }, () => ({
       x: Math.random() * w,
-      y: h * 0.3 + Math.random() * h * 0.5,
-      radius: 40 + Math.random() * 120,
+      y: h * 0.2 + Math.random() * h * 0.6,
+      radius: 60 + Math.random() * 200,
       color: COLORS[Math.floor(Math.random() * COLORS.length)],
-      speed: 0.1 + Math.random() * 0.2,
+      speed: 0.1 + Math.random() * 0.3,
       phase: Math.random() * Math.PI * 2,
     }));
 
@@ -105,7 +107,7 @@ export default function Cityscape() {
       ref={canvasRef}
       aria-hidden="true"
       className="fixed inset-0 w-full h-full pointer-events-none"
-      style={{ zIndex: 0, opacity: 0.8 }}
+      style={{ zIndex: 0, opacity: 1 }}
     />
   );
 }

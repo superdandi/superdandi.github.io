@@ -45,7 +45,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased scanlines crt flicker grid-bg">
+      <body className="antialiased scanlines crt crt-screen chromatic-aberration flicker grid-bg">
         {/* Cinematic layers */}
         <RainCanvas />
         <Cityscape />

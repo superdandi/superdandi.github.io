@@ -4,50 +4,64 @@ import { useEffect, useRef, useCallback } from "react";
 
 export default function VHSGlitch() {
   const glitchRef = useRef<HTMLDivElement>(null);
-  const activeRef = useRef(false);
 
   const triggerGlitch = useCallback(() => {
-    if (activeRef.current) return;
-    activeRef.current = true;
-
+    // Allow overlapping glitches for MAXIMALIST chaos
     const el = glitchRef.current;
     if (!el) return;
 
     const type = Math.random();
-    const duration = 100 + Math.random() * 300;
+    const duration = 150 + Math.random() * 400;
 
-    if (type < 0.3) {
+    if (type < 0.25) {
       // Horizontal scan line glitch
-      const h = 2 + Math.random() * 6;
+      const h = 3 + Math.random() * 10;
       const top = Math.random() * 100;
       el.style.display = "block";
       el.style.top = `${top}%`;
       el.style.height = `${h}px`;
-      el.style.background = `rgba(255, 255, 255, ${0.03 + Math.random() * 0.06})`;
-      el.style.transform = `translateX(${(Math.random() - 0.5) * 4}px)`;
-    } else if (type < 0.6) {
-      // Color shift bar
-      const h = 4 + Math.random() * 15;
+      el.style.background = `rgba(255, 255, 255, ${0.06 + Math.random() * 0.12})`;
+      el.style.transform = `translateX(${(Math.random() - 0.5) * 12}px)`;
+    } else if (type < 0.5) {
+      // Color shift bar — INTENSE
+      const h = 5 + Math.random() * 20;
       const top = Math.random() * 100;
       el.style.display = "block";
       el.style.top = `${top}%`;
       el.style.height = `${h}px`;
-      el.style.background = Math.random() > 0.5
-        ? `rgba(0, 243, 255, 0.03)`
-        : `rgba(255, 0, 255, 0.03)`;
-      el.style.transform = `translateX(${(Math.random() - 0.5) * 6}px)`;
+      const colors = [
+        `rgba(0, 243, 255, 0.08)`,
+        `rgba(255, 0, 255, 0.07)`,
+        `rgba(255, 180, 50, 0.06)`,
+        `rgba(0, 255, 65, 0.06)`,
+      ];
+      el.style.background = colors[Math.floor(Math.random() * colors.length)];
+      el.style.transform = `translateX(${(Math.random() - 0.5) * 15}px)`;
+    } else if (type < 0.75) {
+      // Chromatic aberration offset — TWO overlapping bars
+      const h = 4 + Math.random() * 18;
+      const top = Math.random() * 100;
+      el.style.display = "block";
+      el.style.top = `${top}%`;
+      el.style.height = `${h}px`;
+      // Simulate color split via box-shadow
+      el.style.background = "rgba(0,243,255,0.05)";
+      el.style.boxShadow = `4px 0 0 rgba(255,0,255,0.05), -4px 0 0 rgba(255,180,50,0.04)`;
+      el.style.transform = "none";
     } else {
       // Full screen flicker
       el.style.display = "block";
       el.style.top = "0";
       el.style.height = "100%";
-      el.style.background = `rgba(255, 255, 255, ${0.01 + Math.random() * 0.02})`;
+      el.style.background = `rgba(255, 255, 255, ${0.03 + Math.random() * 0.04})`;
       el.style.transform = "none";
     }
 
     setTimeout(() => {
-      if (el) el.style.display = "none";
-      activeRef.current = false;
+      if (el) {
+        el.style.display = "none";
+        el.style.boxShadow = "none";
+      }
     }, duration);
   }, []);
 
@@ -56,7 +70,7 @@ export default function VHSGlitch() {
     let timeout: NodeJS.Timeout;
 
     const scheduleGlitch = () => {
-      const delay = 3000 + Math.random() * 15000; // Every 3-18 seconds
+      const delay = 1000 + Math.random() * 6000; // Every 1-7 seconds (MAXIMALIST)
       timeout = setTimeout(() => {
         triggerGlitch();
         scheduleGlitch();

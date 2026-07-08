@@ -66,8 +66,8 @@
       0deg,
       transparent,
       transparent 2px,
-      rgba(0, 0, 0, 0.08) 2px,
-      rgba(0, 0, 0, 0.08) 4px
+      rgba(0, 0, 0, 0.18) 2px,
+      rgba(0, 0, 0, 0.18) 5px
     );
     pointer-events: none;
     z-index: 100;
@@ -81,11 +81,56 @@
     height: 100%;
     background: radial-gradient(
       ellipse at center,
-      transparent 60%,
-      rgba(0, 0, 0, 0.5) 100%
+      transparent 55%,
+      rgba(0, 0, 0, 0.7) 100%
     );
     pointer-events: none;
     z-index: 99;
+  }
+  /* Cinematic screen curvature overlay */
+  .crt-screen::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.15) 0%,
+      transparent 5%,
+      transparent 95%,
+      rgba(0,0,0,0.25) 100%
+    ),
+    linear-gradient(
+      to right,
+      rgba(0,0,0,0.12) 0%,
+      transparent 4%,
+      transparent 96%,
+      rgba(0,0,0,0.18) 100%
+    );
+    pointer-events: none;
+    z-index: 98;
+  }
+  /* Chromatic aberration overlay — subtle RGB split */
+  .chromatic-aberration::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(255,0,0,0.015) 0px,
+      rgba(0,255,0,0.015) 1px,
+      rgba(0,0,255,0.015) 2px,
+      transparent 3px,
+      transparent 6px
+    );
+    pointer-events: none;
+    z-index: 97;
+    mix-blend-mode: screen;
   }
   .flicker {
     animation: flicker 0.15s infinite;
@@ -99,10 +144,10 @@
   }
   .grid-bg {
     background-image: linear-gradient(
-        rgba(0, 243, 255, 0.03) 1px,
+        rgba(0, 243, 255, 0.06) 1px,
         transparent 1px
       ),
-      linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
+      linear-gradient(90deg, rgba(0, 243, 255, 0.06) 1px, transparent 1px);
     background-size: 40px 40px;
   }
   .link-underline {
@@ -143,8 +188,14 @@
   100% {
     opacity: 1;
   }
+  10% {
+    opacity: 0.96;
+  }
   50% {
-    opacity: 0.98;
+    opacity: 0.985;
+  }
+  90% {
+    opacity: 0.97;
   }
 }
 
