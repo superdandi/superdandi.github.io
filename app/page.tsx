@@ -21,16 +21,12 @@ const SOCIAL_LINKS = [
 ] as const;
 
 const PROJECTS = [
-  { name: "warzine", desc: "beat 'em up / fanzine punk — 2P local, 3 niveles, jefes", lang: "JS", href: "https://superdandi.github.io/warzine/" },
   { name: "infocob", desc: "diseño & desarrollo digital — web, IA y productos digitales", lang: "WEB", href: "https://superdandi.github.io/infocob/" },
-  { name: "sabios", desc: "pizzería artesanal Talca — pizza por pedazos y completos", lang: "WEB", href: "https://superdandi.github.io/sabios/" },
   { name: "vizcoso", desc: "Vizcoso Entertainment — estudio de grabación & productora", lang: "WEB", href: "https://superdandi.github.io/vizcoso/" },
-  { name: "pungafighters", desc: "2D fighting game engine & framework", lang: "TypeScript", href: "https://github.com/superdandi/pungafighters" },
-  { name: "capture-button", desc: "audio capture & signal processing", lang: "C++", href: "https://github.com/superdandi/capture-button" },
-  { name: "tapizate", desc: "web tapestry / UI experiments", lang: "CSS", href: "https://github.com/superdandi/tapizate" },
-  { name: "super-ffmpeg-stream", desc: "ffmpeg streaming toolkit", lang: "Shell", href: "https://github.com/superdandi/super-ffmpeg-stream" },
-  { name: "fxprimavera", desc: "audio DSP plugin suite", lang: "JavaScript", href: "https://github.com/superdandi/fxprimavera" },
-  { name: "energy-awareness-skill", desc: "LLM energy estimation skill for OpenCode", lang: "Shell", href: "https://github.com/superdandi/energy-awareness-skill" },
+  { name: "warzine", desc: "beat 'em up / fanzine punk — 2P local, 3 niveles, jefes", lang: "JS", href: "https://superdandi.github.io/warzine/" },
+  { name: "super-ffmpeg-stream", desc: "streamer universal Twitch 24/7 basado en FFmpeg", lang: "Shell", href: "https://github.com/superdandi/super-ffmpeg-stream" },
+  { name: "oc-failover", desc: "failover wrapper para OpenCode con inteligencia artificial", lang: "Shell", href: "https://github.com/superdandi/oc-failover" },
+  { name: "energy-awareness-skill", desc: "skill de estimación energética para LLMs en OpenCode", lang: "Shell", href: "https://github.com/superdandi/energy-awareness-skill" },
 ];
 
 const CAREER_LOG = [
