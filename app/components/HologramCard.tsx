@@ -14,7 +14,7 @@ const GRID_ROWS = 22;
 const IMG_CROP = 0.92;
 // Luminance threshold: values ABOVE this = bright background (no character)
 // Higher = more of the image shows characters; Lower = only darkest parts show
-const BRIGHT_THRESHOLD = 0.78;
+const BRIGHT_THRESHOLD = 0.85;
 const IMG_URL = "/images/DC.jpg";
 const NUM_RAIN = 12;
 
@@ -205,13 +205,13 @@ export default function HologramCard() {
           }
 
           // Alpha: smooth gradient from luminance
-          // Dark areas (hair) = dim, bright areas (skin/highlights) = bright
-          let alpha = 0.12 + 0.78 * cell.lum;
+          // Dark areas (hair) = dim but visible, bright areas = bright
+          let alpha = 0.38 + 0.55 * cell.lum;
           let colorRGB = "0, 255, 65";
           let blur = 0;
 
           // Bright areas: shift to cyan with subtle glow
-          if (cell.lum > 0.65) {
+          if (cell.lum > 0.55) {
             colorRGB = "0, 243, 255";
             blur = isGlitching ? 4 : 2;
             alpha = Math.min(0.95, alpha + 0.1);
