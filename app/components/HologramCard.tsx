@@ -7,15 +7,15 @@ const CHARS =
   "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 // Grid — finer than before for better face definition
-const GRID_COLS = 40;
-const GRID_ROWS = 16;
+const GRID_COLS = 55;
+const GRID_ROWS = 22;
 
-// Image crop: take left 62% of DC.jpg (where the person is)
-const IMG_CROP = 0.62;
+// Image crop: take left 88% of DC.jpg (more context/air around person)
+const IMG_CROP = 0.88;
 // Luminance threshold: values above this = background (no character)
-const BRIGHT_THRESHOLD = 0.58;
+const BRIGHT_THRESHOLD = 0.62;
 const IMG_URL = "/images/DC.jpg";
-const NUM_RAIN = 8;
+const NUM_RAIN = 12;
 
 function randomChar(): string {
   return CHARS[Math.floor(Math.random() * CHARS.length)];
