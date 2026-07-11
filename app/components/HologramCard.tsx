@@ -12,8 +12,9 @@ const GRID_ROWS = 22;
 
 // Image crop: take left 88% of DC.jpg (more context/air around person)
 const IMG_CROP = 0.92;
-// Luminance threshold: values above this = background (no character)
-const BRIGHT_THRESHOLD = 0.40;
+// Luminance threshold: values ABOVE this = bright background (no character)
+// Higher = more of the image shows characters; Lower = only darkest parts show
+const BRIGHT_THRESHOLD = 0.78;
 const IMG_URL = "/images/DC.jpg";
 const NUM_RAIN = 12;
 
