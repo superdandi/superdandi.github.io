@@ -11,7 +11,7 @@ const GRID_COLS = 55;
 const GRID_ROWS = 22;
 
 // Image crop: take left 88% of DC.jpg (more context/air around person)
-const IMG_CROP = 0.88;
+const IMG_CROP = 0.92;
 // Luminance threshold: values above this = background (no character)
 const BRIGHT_THRESHOLD = 0.62;
 const IMG_URL = "/images/DC.jpg";
