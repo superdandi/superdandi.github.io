@@ -6,11 +6,33 @@ import { useEffect, useRef, useState } from "react";
 const CHARS =
   "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-// Grid dimensions — match the brightness sampling grid
-const GRID_COLS = 34;
-const GRID_ROWS = 13;
-const IMG_CROP = 0.62; // crop left 62% of image (where the person is)
+// Grid — finer than before for better face definition
+const GRID_COLS = 40;
+const GRID_ROWS = 16;
+
+// Image crop: take left 62% of DC.jpg (where the person is)
+const IMG_CROP = 0.62;
+// Luminance threshold: values above this = background (no character)
+const BRIGHT_THRESHOLD = 0.58;
 const IMG_URL = "/images/DC.jpg";
+const NUM_RAIN = 8;
+
+function randomChar(): string {
+  return CHARS[Math.floor(Math.random() * CHARS.length)];
+}
+
+interface Cell {
+  lum: number; // stretched luminance 0-1 (after contrast stretching)
+  char: string; // current displayed character
+  nextChange: number; // timestamp (seconds) when to shimmer to a new char
+}
+
+interface RainDrop {
+  col: number;
+  y: number; // float row position
+  speed: number; // rows per second
+  trailLen: number;
+}
 
 export default function HologramCard() {
   const [glitch, setGlitch] = useState(false);
@@ -18,19 +40,17 @@ export default function HologramCard() {
   const [imgReady, setImgReady] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const glitchRef = useRef(false);
-  const timeRef = useRef(0);
   const animRef = useRef(0);
-  const brightnessRef = useRef<number[]>(
-    new Array(GRID_COLS * GRID_ROWS).fill(0)
+  const cellsRef = useRef<(Cell | null)[]>(
+    new Array(GRID_COLS * GRID_ROWS).fill(null)
   );
-  const dropsRef = useRef<
-    { y: number; speed: number; burst: number }[]
-  >([]);
+  const rainRef = useRef<RainDrop[]>([]);
 
-  // ── Load image and pre-compute brightness grid ──
+  // ── Load image and pre-compute ASCII brightness grid ──
   useEffect(() => {
     const img = new Image();
     img.crossOrigin = "anonymous";
+
     img.onload = () => {
       const off = document.createElement("canvas");
       off.width = GRID_COLS;
@@ -38,16 +58,14 @@ export default function HologramCard() {
       const octx = off.getContext("2d");
       if (!octx) return;
 
-      // Crop: focus on the left portion where the person is
+      // Crop: left IMG_CROP fraction of image (person's area)
       const cropW = img.width * IMG_CROP;
-      const cropH = img.height;
-
       octx.drawImage(
         img,
         0,
         0,
         cropW,
-        cropH,
+        img.height,
         0,
         0,
         GRID_COLS,
@@ -55,33 +73,52 @@ export default function HologramCard() {
       );
 
       const data = octx.getImageData(0, 0, GRID_COLS, GRID_ROWS).data;
-      const grid = brightnessRef.current;
+      const cells: (Cell | null)[] = new Array(GRID_COLS * GRID_ROWS);
+
       for (let i = 0; i < GRID_COLS * GRID_ROWS; i++) {
         const r = data[i * 4];
         const g = data[i * 4 + 1];
         const b = data[i * 4 + 2];
-        // Luminance (standard formula)
-        grid[i] = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+        const lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+        if (lum >= BRIGHT_THRESHOLD) {
+          // Bright background → no character
+          cells[i] = null;
+        } else {
+          // Contrast-stretch luminance from [0, THRESHOLD] to [0, 1]
+          const stretched = Math.min(1, lum / BRIGHT_THRESHOLD);
+          cells[i] = {
+            lum: stretched,
+            char: randomChar(),
+            nextChange: Math.random() * 5, // stagger initial shimmer
+          };
+        }
       }
 
+      cellsRef.current = cells;
+
       // Initialize rain drops
-      dropsRef.current = Array.from({ length: GRID_COLS }, (_, c) => ({
-        y: Math.random() * GRID_ROWS,
-        speed: 0.04 + Math.random() * 0.08,
-        burst: 0,
+      rainRef.current = Array.from({ length: NUM_RAIN }, () => ({
+        col: Math.floor(Math.random() * GRID_COLS),
+        y: -Math.random() * GRID_ROWS,
+        speed: 2 + Math.random() * 4,
+        trailLen: 2 + Math.floor(Math.random() * 3),
       }));
 
       setImgReady(true);
     };
+
     img.onerror = () => {
-      // Fallback: mark as ready with empty grid (just shows rain)
-      dropsRef.current = Array.from({ length: GRID_COLS }, () => ({
-        y: Math.random() * GRID_ROWS,
-        speed: 0.04 + Math.random() * 0.08,
-        burst: 0,
+      // Fallback: empty grid (just rain)
+      rainRef.current = Array.from({ length: NUM_RAIN }, () => ({
+        col: Math.floor(Math.random() * GRID_COLS),
+        y: -Math.random() * GRID_ROWS,
+        speed: 2 + Math.random() * 4,
+        trailLen: 2 + Math.floor(Math.random() * 3),
       }));
       setImgReady(true);
     };
+
     img.src = IMG_URL;
   }, []);
 
@@ -110,10 +147,11 @@ export default function HologramCard() {
     };
   }, []);
 
-  // ── Canvas Matrix animation (brightness-modulated rain) ──
+  // ── Canvas render: static ASCII grid + rain overlay ──
   useEffect(() => {
+    if (!imgReady) return;
     const canvas = canvasRef.current;
-    if (!canvas || !imgReady) return;
+    if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
@@ -134,85 +172,64 @@ export default function HologramCard() {
     resize();
     window.addEventListener("resize", resize);
 
-    const draw = () => {
-      timeRef.current += 0.016;
-      const t = timeRef.current;
+    let prevTime = 0;
+
+    const draw = (now: number) => {
+      if (prevTime === 0) prevTime = now;
+      const dt = Math.min(0.05, (now - prevTime) / 1000);
+      prevTime = now;
+      const t = now / 1000;
       const isGlitching = glitchRef.current;
-      const brightness = brightnessRef.current;
-      const drops = dropsRef.current;
+      const cells = cellsRef.current;
+      const rain = rainRef.current;
 
+      // ── Clear ──
       ctx.clearRect(0, 0, w, h);
-
-      // Glitch offset
-      const gx = isGlitching ? (Math.random() - 0.5) * 6 : 0;
 
       const cellW = w / GRID_COLS;
       const cellH = h / GRID_ROWS;
-      const fontSize = Math.floor(cellH * 0.82);
+      const fontSize = Math.max(4, Math.floor(Math.min(cellW * 1.4, cellH * 0.82)));
 
       ctx.font = `${fontSize}px monospace`;
       ctx.textBaseline = "top";
       ctx.textAlign = "center";
 
-      for (let c = 0; c < GRID_COLS; c++) {
-        const drop = drops[c];
-        drop.y += drop.speed;
-        if (drop.y > GRID_ROWS + 4) drop.y = -4;
+      const gx = isGlitching ? (Math.random() - 0.5) * 4 : 0;
 
-        // Occasional burst: a random column temporarily becomes very active
-        if (Math.random() < 0.002) drop.burst = 8;
-        if (drop.burst > 0) drop.burst -= 0.05;
-
-        for (let r = 0; r < GRID_ROWS; r++) {
+      // ═══════════════════════════════════════════════
+      //  LAYER 1: Static ASCII art portrait
+      // ═══════════════════════════════════════════════
+      for (let r = 0; r < GRID_ROWS; r++) {
+        for (let c = 0; c < GRID_COLS; c++) {
           const idx = r * GRID_COLS + c;
-          const b = brightness[idx];
+          const cell = cells[idx];
+          if (!cell) continue; // background — skip
 
-          // Threshold: skip very dark areas (background / void)
-          if (b < 0.06) continue;
+          // Shimmer: change to a new random char every 3-7 seconds
+          if (t > cell.nextChange) {
+            cell.char = randomChar();
+            cell.nextChange = t + 3 + Math.random() * 4;
+          }
 
-          // Character cycling (Matrix code effect)
-          const cycleOffset = isGlitching ? Math.random() * 100 : 0;
-          const charIdx = Math.abs(
-            Math.floor(
-              (c * 7 + r * 13 + t * 3.5 + cycleOffset) % CHARS.length
-            )
-          );
-          const char = CHARS[charIdx];
-
-          // Base alpha from brightness
-          let alpha = b * 0.72;
+          // Alpha: smooth gradient from luminance
+          // Dark areas (hair) = dim, bright areas (skin/highlights) = bright
+          let alpha = 0.12 + 0.78 * cell.lum;
           let colorRGB = "0, 255, 65";
           let blur = 0;
 
-          // Brighter areas: cyan with glow
-          if (b > 0.5) {
+          // Bright areas: shift to cyan with subtle glow
+          if (cell.lum > 0.65) {
             colorRGB = "0, 243, 255";
             blur = isGlitching ? 4 : 2;
-            alpha = Math.min(1, alpha + 0.12);
+            alpha = Math.min(0.95, alpha + 0.1);
           }
 
-          // Rain drop head: very bright when passing through
-          const trailDist = Math.abs(drop.y - r);
-          if (trailDist < 2.5) {
-            const headBoost = (1 - trailDist / 2.5) * 0.45;
-            alpha = Math.min(1, alpha + headBoost);
-            if (trailDist < 0.8) {
-              colorRGB = "180, 255, 200"; // near-white head
-              blur = 4;
-            }
-          }
-
-          // Burst: boost entire column temporarily
-          if (drop.burst > 5) {
-            alpha = Math.min(1, alpha + 0.3);
-          }
-
-          // Character flicker: occasional dimming
-          const flicker = 0.85 + 0.15 * Math.sin(t * 5 + c * 0.8 + r * 1.2);
+          // Subtle per-character flicker (breathing effect)
+          const flicker = 0.88 + 0.12 * Math.sin(t * 4 + c * 0.7 + r * 1.1);
           alpha *= flicker;
 
-          // Glitch effect: random color shift
-          if (isGlitching && Math.random() < 0.12) {
+          // Glitch: random color shift on some characters
+          if (isGlitching && Math.random() < 0.08) {
             colorRGB = Math.random() > 0.5 ? "0, 243, 255" : "255, 0, 255";
             alpha *= 0.6;
           }
@@ -223,11 +240,62 @@ export default function HologramCard() {
           ctx.shadowColor = blur ? `rgb(${colorRGB})` : "transparent";
           ctx.shadowBlur = blur;
           ctx.fillStyle = `rgba(${colorRGB}, ${Math.max(0, Math.min(1, alpha))})`;
+          ctx.fillText(cell.char, cx, cy);
+        }
+      }
+
+      // ═══════════════════════════════════════════════
+      //  LAYER 2: Rain overlay (falls over ASCII art)
+      // ═══════════════════════════════════════════════
+      ctx.shadowBlur = 0;
+      for (const drop of rain) {
+        drop.y += drop.speed * dt;
+
+        if (drop.y > GRID_ROWS + drop.trailLen) {
+          drop.col = Math.floor(Math.random() * GRID_COLS);
+          drop.y = -drop.trailLen;
+          drop.speed = 2 + Math.random() * 4;
+          drop.trailLen = 2 + Math.floor(Math.random() * 3);
+        }
+
+        for (let i = 0; i <= drop.trailLen; i++) {
+          const ry = Math.floor(drop.y) - i;
+          if (ry < 0 || ry >= GRID_ROWS) continue;
+
+          let alpha: number;
+          let colorRGB: string;
+          let blur: number;
+
+          if (i === 0) {
+            // Head: bright white-green
+            alpha = 0.85;
+            colorRGB = "180, 255, 200";
+            blur = 3;
+          } else {
+            // Trail: dim green, fading
+            alpha = 0.35 * (1 - i / (drop.trailLen + 1));
+            colorRGB = "0, 255, 65";
+            blur = 0;
+          }
+
+          const charIdx = Math.abs(
+            Math.floor((drop.col * 7 + t * 8 + i * 13) % CHARS.length)
+          );
+          const char = CHARS[charIdx];
+
+          const cx = drop.col * cellW + cellW / 2;
+          const cy = ry * cellH;
+
+          ctx.shadowColor = blur ? `rgb(${colorRGB})` : "transparent";
+          ctx.shadowBlur = blur;
+          ctx.fillStyle = `rgba(${colorRGB}, ${alpha})`;
           ctx.fillText(char, cx, cy);
         }
       }
 
-      // Glitch bar across the canvas
+      // ═══════════════════════════════════════════════
+      //  LAYER 3: Glitch bar
+      // ═══════════════════════════════════════════════
       if (isGlitching && Math.random() < 0.2) {
         const barY = Math.random() * h;
         const barH = 2 + Math.random() * 4;
@@ -242,7 +310,7 @@ export default function HologramCard() {
       animRef.current = requestAnimationFrame(draw);
     };
 
-    draw();
+    animRef.current = requestAnimationFrame(draw);
 
     return () => {
       cancelAnimationFrame(animRef.current);
