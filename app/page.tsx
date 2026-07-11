@@ -35,13 +35,13 @@ const PROJECTS = [
 
 const CAREER_LOG = [
   {
-    year: "2006",
+    year: "2006 — 2007",
     boot: "Akzio Consultores — Banco de Chile",
     sys: "COBOL · IBM Mainframe · UNIX",
     log: "Analista Programador. Desarrollo y mantención de sistemas bancarios corporativos. Procesamiento batch y lógica transaccional para el core financiero.",
   },
   {
-    year: "2007 — Present",
+    year: "2008 — Present",
     boot: "Consultor TI Independiente",
     sys: "Full-Stack · IA · 47+ soluciones web · 100+ clientes",
     log: "Consultoría tecnológica autónoma. Desarrollo web, integración de APIs, automatización e IA. Cofundador de INFOCOB Computación (2008).",

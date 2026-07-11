@@ -48,7 +48,7 @@ const SKILL_GROUPS = [
 
 const EXPERIENCE = [
   {
-    period: "2006",
+    period: "2006 — 2007",
     role: "Analista Programador",
     org: "Akzio Consultores — Banco de Chile",
     highlights: [
@@ -58,7 +58,7 @@ const EXPERIENCE = [
     ],
   },
   {
-    period: "2007 — Present",
+    period: "2008 — Present",
     role: "Consultor TI Independiente",
     org: "Freelance · Chile",
     highlights: [
