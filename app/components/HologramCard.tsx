@@ -13,7 +13,7 @@ const GRID_ROWS = 22;
 // Image crop: take left 88% of DC.jpg (more context/air around person)
 const IMG_CROP = 0.92;
 // Luminance threshold: values above this = background (no character)
-const BRIGHT_THRESHOLD = 0.62;
+const BRIGHT_THRESHOLD = 0.40;
 const IMG_URL = "/images/DC.jpg";
 const NUM_RAIN = 12;
 
@@ -36,7 +36,6 @@ interface RainDrop {
 
 export default function HologramCard() {
   const [glitch, setGlitch] = useState(false);
-  const [scanOffset, setScanOffset] = useState(0);
   const [imgReady, setImgReady] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const glitchRef = useRef(false);
@@ -135,15 +134,8 @@ export default function HologramCard() {
       }
     }, 2000);
 
-    let frame = 0;
-    const scanTimer = setInterval(() => {
-      frame++;
-      setScanOffset((frame * 3) % 200);
-    }, 50);
-
     return () => {
       clearInterval(glitchTimer);
-      clearInterval(scanTimer);
     };
   }, []);
 
@@ -334,22 +326,6 @@ export default function HologramCard() {
           minWidth: "240px",
         }}
       >
-        {/* Scanning line overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none overflow-hidden rounded"
-          style={{ mixBlendMode: "screen" }}
-        >
-          <div
-            className="absolute left-0 right-0 h-0.5"
-            style={{
-              top: `${scanOffset}%`,
-              background:
-                "linear-gradient(90deg, transparent, rgba(0,243,255,0.3), transparent)",
-              boxShadow: "0 0 8px rgba(0,243,255,0.2)",
-            }}
-          />
-        </div>
-
         {/* Holographic flicker */}
         <div
           className="absolute inset-0 pointer-events-none rounded"
