@@ -1,0 +1,137 @@
+Daniel Alberto Cobos Mansilla
+
+Software Engineer | Technical Solutions Consultant | Web Developer
+
+Talca, Chile
+Disponible para trabajo remoto (LatAm / Worldwide)
+
+================================================================================
+
+PERFIL PROFESIONAL
+
+Desarrollador de Software y Tecnico de Nivel Superior en Sistemas Informaticos
+con mas de 18 anos de experiencia disenando e implementando soluciones
+tecnologicas para empresas, instituciones educacionales y clientes particulares.
+
+Durante mi trayectoria he desarrollado mas de 47 soluciones web y prestado
+servicios tecnologicos a mas de 100 clientes, evolucionando junto con la
+industria desde los primeros desarrollos web en HTML hasta la integracion
+actual de inteligencia artificial para acelerar el desarrollo, automatizar
+procesos y construir soluciones adaptadas a cada necesidad.
+
+Mi experiencia combina desarrollo de software, desarrollo web, consultoria TI,
+infraestructura tecnologica, integracion de APIs, automatizacion y soporte
+tecnico. Estoy acostumbrado a trabajar de forma autonoma, colaborar con equipos
+remotos y desenvolverme en entornos multiplataforma (macOS, Linux y Windows).
+
+Actualmente busco integrarme a un equipo de desarrollo donde pueda aportar
+experiencia, capacidad analitica y una fuerte orientacion a la resolucion de
+problemas mediante soluciones de software.
+
+================================================================================
+
+LOGROS PROFESIONALES
+
+- Mas de 18 anos de experiencia profesional.
+- Mas de 47 soluciones web desarrolladas.
+- Mas de 100 clientes atendidos.
+- Experiencia en desarrollo corporativo para Banco de Chile.
+- Implementacion de soluciones para empresas, instituciones y emprendedores.
+- Integracion de herramientas de Inteligencia Artificial en procesos de desarrollo.
+
+================================================================================
+
+COMPETENCIAS TECNICAS
+
+Desarrollo Web
+  HTML5, CSS3, JavaScript, Responsive Design, APIs REST, JSON, WordPress,
+  Blogger, PrestaShop
+
+Desarrollo de Software
+  Python, COBOL, SQL
+
+Inteligencia Artificial
+  OpenAI API, Prompt Engineering, Automatizacion, Integracion de IA
+
+Infraestructura TI
+  Windows, Linux, macOS, Redes, Hosting, Dominios, Soporte TI
+
+Herramientas
+  Git, GitHub, Visual Studio Code, Chrome DevTools, GitHub Pages, Figma,
+  Adobe Premiere Pro, Adobe Photoshop
+
+================================================================================
+
+EXPERIENCIA PROFESIONAL
+
+Consultor TI Independiente | Software Developer
+2007 - Actualidad
+
+Diseno e implementacion de soluciones tecnologicas para empresas,
+instituciones y clientes particulares.
+
+Principales responsabilidades:
+- Desarrollo de aplicaciones y soluciones web.
+- Consultoria tecnologica.
+- Administracion de infraestructura informatica.
+- Integracion de APIs.
+- Automatizacion de procesos.
+- Soporte remoto y presencial.
+- Administracion de hosting, dominios y servicios web.
+- Desarrollo asistido por Inteligencia Artificial.
+
+--------------------------------------------------------------------------------
+
+Analista Programador | Akzio Consultores
+Proyecto: Banco de Chile
+
+- Desarrollo COBOL.
+- IBM Mainframe.
+- UNIX.
+- Mantencion de sistemas bancarios corporativos.
+
+--------------------------------------------------------------------------------
+
+Cofundador | INFOCOB Computacion
+
+- Desarrollo web.
+- Servicio tecnico.
+- Redes.
+- Soluciones multimedia.
+- Imagen corporativa digital.
+
+--------------------------------------------------------------------------------
+
+Tecnico Informatico | Proyecto SEP
+Escuela Panguilemo
+
+- Administracion del laboratorio de computacion.
+- Mantencion de infraestructura tecnologica.
+- Administracion de redes.
+- Desarrollo del sitio web institucional.
+- Soporte a docentes, funcionarios y estudiantes.
+- Implementacion de soluciones audiovisuales.
+- Talleres de computacion.
+
+================================================================================
+
+FORMACION
+
+Tecnico de Nivel Superior en Sistemas Informaticos
+Instituto Profesional Santo Tomas
+
+================================================================================
+
+MODALIDAD DE TRABAJO
+
+- Trabajo Remoto
+- Disponible para colaborar con equipos internacionales.
+
+================================================================================
+
+CONTACTO
+
+GitHub:   https://github.com/superdandi
+LinkedIn: https://linkedin.com/in/superdandi
+Email:    dandi@superdandi.dev
+Portfolio: https://superdandi.github.io

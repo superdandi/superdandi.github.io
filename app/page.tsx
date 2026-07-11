@@ -36,21 +36,27 @@ const PROJECTS = [
 const CAREER_LOG = [
   {
     year: "2006",
-    boot: "Banco de Chile — Departamento de Desarrollo",
-    sys: "COBOL (ANSI/ISO) · UNIX · Mainframe",
-    log: "Diseño e implementación de lógica transaccional masiva para el core bancario. Procesamiento batch de alta eficiencia en entorno mainframe.",
+    boot: "Akzio Consultores — Banco de Chile",
+    sys: "COBOL · IBM Mainframe · UNIX",
+    log: "Analista Programador. Desarrollo y mantención de sistemas bancarios corporativos. Procesamiento batch y lógica transaccional para el core financiero.",
   },
   {
     year: "2007",
-    boot: "Migración a Sistemas Abiertos",
-    sys: "Linux · Shell Scripting · Automatización",
-    log: "Transición de procesos legacy a plataformas abiertas. Optimización de algoritmos de validación de datos financieros.",
+    boot: "Escuela Panguilemo — Proyecto SEP",
+    sys: "Redes · Linux · Web Institucional",
+    log: "Técnico Informático. Administración del laboratorio de computación, redes e infraestructura. Desarrollo del sitio web institucional. Talleres de computación.",
   },
   {
-    year: "PRESENT",
-    boot: "Full-Stack Engineer · Modern Web",
-    sys: "TypeScript · React · Next.js · Node.js · Cloud",
-    log: "Puente entre el mundo del mainframe y la web moderna. Arquitectura de sistemas híbridos que conectan legado financiero con infraestructura cloud.",
+    year: "2008",
+    boot: "INFOCOB Computación — Cofundador",
+    sys: "Web · Redes · Multimedia",
+    log: "Cofundador de empresa de servicios tecnológicos. Desarrollo web, servicio técnico, redes, soluciones multimedia e imagen corporativa digital.",
+  },
+  {
+    year: "2007+",
+    boot: "Consultor TI Independiente",
+    sys: "Full-Stack · IA · 47+ soluciones web · 100+ clientes",
+    log: "18+ años de consultoría tecnológica autónoma. Desarrollo web, integración de APIs, automatización de procesos. Integración de IA para acelerar desarrollo.",
   },
 ];
 
@@ -68,6 +74,14 @@ const SKILLS = {
     "Sistemas Transaccionales",
   ],
 };
+
+const ACHIEVEMENTS = [
+  "18+ años de experiencia profesional",
+  "47+ soluciones web desarrolladas",
+  "100+ clientes atendidos",
+  "Desarrollo corporativo para Banco de Chile",
+  "Integración de IA en procesos de desarrollo",
+];
 
 export default function Home() {
   const [showBoot, setShowBoot] = useState(true);
@@ -224,6 +238,28 @@ export default function Home() {
                 >
                   {`[ ${link.label} ]`}
                 </a>
+              ))}
+            </div>
+          </section>
+        </CineSection>
+
+        {/* ── ACHIEVEMENTS ── */}
+        <CineSection delay={0.3}>
+          <section className="space-y-4">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="text-[var(--neon-cyan)] text-sm font-mono">$</span>
+              <span className="text-[var(--neon-green)] text-xs font-mono">
+                cat /var/log/achievements.log
+              </span>
+            </div>
+            <div className="glass-card border border-[var(--neon-cyan)]/15 rounded p-4 space-y-2">
+              {ACHIEVEMENTS.map((item, i) => (
+                <div key={i} className="flex items-center gap-3 log-entry" style={{ animationDelay: `${0.1 + i * 0.15}s` }}>
+                  <span className="text-[var(--neon-green)] font-mono text-sm">[✓]</span>
+                  <span className="text-[var(--text-primary)] font-mono text-xs sm:text-sm">
+                    {item}
+                  </span>
+                </div>
               ))}
             </div>
           </section>
@@ -396,10 +432,23 @@ export default function Home() {
                   </a>
                 ))}
               </div>
-              <div className="text-[10px] font-mono text-[var(--neon-green)]/70 space-y-1">
+              <div className="text-[10px] font-mono text-[var(--neon-green)]/70 space-y-2">
                 <div>STATUS: <span className="text-[var(--neon-green)] animate-pulse">OPEN FOR CONTRACTS</span></div>
-                <div className="text-[var(--text-dim)] opacity-50">
-                  CV: <span className="text-[var(--neon-cyan)] hover:underline cursor-pointer">coming soon</span>
+                <div>MODALITY: <span className="text-[var(--neon-cyan)]">REMOTE — LatAm / Worldwide</span></div>
+                <div className="flex flex-wrap justify-center gap-3 mt-2">
+                  <a
+                    href="/cv"
+                    className="glass-card border border-[var(--neon-cyan)]/30 rounded px-4 py-2 text-xs font-mono text-[var(--neon-cyan)] transition-all duration-300 hover:scale-105 link-underline no-print"
+                  >
+                    [ 📄 CV VISUAL ]
+                  </a>
+                  <a
+                    href="/cv/superdandi-cv-ats.txt"
+                    download
+                    className="glass-card border border-[var(--neon-green)]/30 rounded px-4 py-2 text-xs font-mono text-[var(--neon-green)] transition-all duration-300 hover:scale-105 link-underline no-print"
+                  >
+                    [ 📝 CV ATS ]
+                  </a>
                 </div>
               </div>
             </div>

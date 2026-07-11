@@ -315,3 +315,85 @@
   box-shadow: 0 0 30px rgba(0, 243, 255, 0.12),
     inset 0 0 20px rgba(0, 243, 255, 0.04);
 }
+
+/* ── Print / PDF Export ── */
+@media print {
+  /* Override CSS variables for print legibility */
+  :root {
+    --neon-cyan: #006699;
+    --neon-magenta: #990066;
+    --neon-yellow: #666600;
+    --neon-green: #006600;
+    --dark-bg: #ffffff;
+    --dark-card: #ffffff;
+    --text-primary: #111111;
+    --text-dim: #666666;
+  }
+
+  /* Hide all visual effect layers */
+  .no-print {
+    display: none !important;
+  }
+  canvas[aria-hidden="true"] {
+    display: none !important;
+  }
+
+  /* Reset body for print */
+  body {
+    background: white !important;
+    color: #111 !important;
+    overflow: visible !important;
+  }
+
+  /* Remove CRT/scanline/glitch overlays */
+  .scanlines::before,
+  .crt::after,
+  .crt-screen::before,
+  .chromatic-aberration::after {
+    display: none !important;
+  }
+
+  /* Glass cards become solid white with subtle borders */
+  .glass-card {
+    background: white !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+    page-break-inside: avoid;
+  }
+
+/* Neon text becomes dark for print legibility */
+  [style*="--neon-cyan"],
+  [style*="--neon-green"],
+  [style*="--neon-magenta"],
+  [style*="--neon-yellow"],
+  [class*="text-shadow"] {
+    text-shadow: none !important;
+    filter: none !important;
+  }
+
+  /* Expand all CineSection reveals */
+  [class*="opacity-0"] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Grid bg hidden */
+  .grid-bg {
+    background: none !important;
+  }
+
+  /* Remove animations */
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Page layout for print */
+  @page {
+    margin: 1.5cm;
+  }
+}
