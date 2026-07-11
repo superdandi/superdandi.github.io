@@ -41,22 +41,22 @@ const CAREER_LOG = [
     log: "Analista Programador. Desarrollo y mantención de sistemas bancarios corporativos. Procesamiento batch y lógica transaccional para el core financiero.",
   },
   {
-    year: "2007",
+    year: "2007 — Present",
+    boot: "Consultor TI Independiente",
+    sys: "Full-Stack · IA · 47+ soluciones web · 100+ clientes",
+    log: "Consultoría tecnológica autónoma. Desarrollo web, integración de APIs, automatización e IA. Cofundador de INFOCOB Computación (2008).",
+  },
+  {
+    year: "2014",
     boot: "Escuela Panguilemo — Proyecto SEP",
     sys: "Redes · Linux · Web Institucional",
     log: "Técnico Informático. Administración del laboratorio de computación, redes e infraestructura. Desarrollo del sitio web institucional. Talleres de computación.",
   },
   {
-    year: "2008",
-    boot: "INFOCOB Computación — Cofundador",
-    sys: "Web · Redes · Multimedia",
-    log: "Cofundador de empresa de servicios tecnológicos. Desarrollo web, servicio técnico, redes, soluciones multimedia e imagen corporativa digital.",
-  },
-  {
-    year: "2007+",
-    boot: "Consultor TI Independiente",
-    sys: "Full-Stack · IA · 47+ soluciones web · 100+ clientes",
-    log: "18+ años de consultoría tecnológica autónoma. Desarrollo web, integración de APIs, automatización de procesos. Integración de IA para acelerar desarrollo.",
+    year: "2015",
+    boot: "Proyecto PISA Chile",
+    sys: "Microdatos · Soporte Técnico · Protocolos Internacionales",
+    log: "Asistente Informático. Configuración y preparación de equipos, soporte técnico durante la aplicación del estudio internacional, resolución de incidencias en terreno, procesamiento de microdatos, cumplimiento de protocolos internacionales.",
   },
 ];
 

@@ -48,20 +48,9 @@ const SKILL_GROUPS = [
 
 const EXPERIENCE = [
   {
-    period: "2007 — Actualidad",
-    role: "Consultor TI Independiente · Software Developer",
-    org: "Talca, Chile",
-    highlights: [
-      "Desarrollo de aplicaciones y soluciones web para 100+ clientes",
-      "Consultoría tecnológica y administración de infraestructura",
-      "Integración de APIs y automatización de procesos",
-      "Desarrollo asistido por Inteligencia Artificial",
-    ],
-  },
-  {
-    period: "2006 — 2007",
+    period: "2006",
     role: "Analista Programador",
-    org: "Akzio Consultores · Proyecto Banco de Chile",
+    org: "Akzio Consultores — Banco de Chile",
     highlights: [
       "Desarrollo COBOL para sistemas bancarios corporativos",
       "IBM Mainframe y UNIX",
@@ -69,23 +58,37 @@ const EXPERIENCE = [
     ],
   },
   {
-    period: "2008 — 2012",
-    role: "Cofundador",
-    org: "INFOCOB Computación",
+    period: "2007 — Present",
+    role: "Consultor TI Independiente",
+    org: "Freelance · Chile",
     highlights: [
-      "Desarrollo web y servicio técnico",
-      "Redes y soluciones multimedia",
-      "Imagen corporativa digital",
+      "Desarrollo web full-stack para 100+ clientes",
+      "Integración de APIs y automatización de procesos",
+      "Desarrollo asistido por Inteligencia Artificial",
+      "Cofundador de INFOCOB Computación (2008)",
     ],
   },
   {
-    period: "2007",
-    role: "Técnico Informático · Proyecto SEP",
-    org: "Escuela Panguilemo",
+    period: "2014 — 2015",
+    role: "Técnico Informático",
+    org: "Escuela Panguilemo — Proyecto SEP",
     highlights: [
       "Administración del laboratorio de computación",
       "Mantención de infraestructura y redes",
       "Desarrollo del sitio web institucional",
+      "Talleres de computación",
+    ],
+  },
+  {
+    period: "2015",
+    role: "Asistente Informático",
+    org: "Proyecto PISA Chile",
+    highlights: [
+      "Configuración y preparación de equipos computacionales",
+      "Soporte técnico durante la aplicación del estudio internacional",
+      "Resolución de incidencias en terreno",
+      "Procesamiento de microdatos",
+      "Cumplimiento de protocolos internacionales",
     ],
   },
 ];
