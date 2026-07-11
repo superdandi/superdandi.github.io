@@ -102,7 +102,7 @@ export default function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       setTime(
-        new Date().toLocaleTimeString("en-US", { hour12: false })
+        new Date().toISOString().split("T")[1].split(".")[0]
       );
     }, 1000);
     return () => clearInterval(interval);
