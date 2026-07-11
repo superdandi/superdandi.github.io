@@ -36,8 +36,8 @@ export default function Cityscape() {
     canvas.width = w;
     canvas.height = h;
 
-    // Initialize neon glows — MAXIMALIST: triple count, larger, brighter
-    glowsRef.current = Array.from({ length: 40 }, () => ({
+    // Initialize neon glows
+    glowsRef.current = Array.from({ length: 20 }, () => ({
       x: Math.random() * w,
       y: h * 0.2 + Math.random() * h * 0.6,
       radius: 60 + Math.random() * 200,
