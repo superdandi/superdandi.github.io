@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import VisitorCounter from "@/app/components/VisitorCounter";
 import HologramCard from "@/app/components/HologramCard";
 import CineSection from "@/app/components/CineSection";
 
@@ -381,23 +380,8 @@ export default function Home() {
           </section>
         </CineSection>
 
-        {/* ── VISITOR COUNTER ── */}
-        <CineSection delay={1.0}>
-          <section className="space-y-4">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="text-[var(--neon-cyan)] text-sm font-mono">$</span>
-              <span className="text-[var(--neon-green)] text-xs font-mono">
-                cat /sys/network/counter
-              </span>
-            </div>
-            <div className="flex justify-center">
-              <VisitorCounter />
-            </div>
-          </section>
-        </CineSection>
-
         {/* ── CONTACT / CTA ── */}
-        <CineSection delay={1.2}>
+        <CineSection delay={1.0}>
           <section className="space-y-4">
             <div className="flex items-center gap-2 mb-4">
               <span className="text-[var(--neon-cyan)] text-sm font-mono">$</span>
