@@ -210,10 +210,9 @@ export default function HologramCard() {
           let colorRGB = "0, 255, 65";
           let blur = 0;
 
-          // Bright areas: shift to cyan with subtle glow
+          // Bright areas: shift to cyan
           if (cell.lum > 0.55) {
             colorRGB = "0, 243, 255";
-            blur = isGlitching ? 4 : 2;
             alpha = Math.min(0.95, alpha + 0.1);
           }
 
