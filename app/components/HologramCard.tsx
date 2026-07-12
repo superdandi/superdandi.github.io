@@ -208,7 +208,7 @@ export default function HologramCard() {
           // Dark areas (hair) = dim but visible, bright areas = bright
           let alpha = 0.38 + 0.55 * cell.lum;
           let colorRGB = "0, 255, 65";
-          let blur = 0;
+          const blur = 0;
 
           // Bright areas: shift to cyan
           if (cell.lum > 0.55) {
