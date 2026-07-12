@@ -7,8 +7,8 @@ const CHARS =
   "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 // Grid — finer than before for better face definition
-const GRID_COLS = 55;
-const GRID_ROWS = 22;
+const GRID_COLS = 45;
+const GRID_ROWS = 18;
 
 // Image crop: take left 88% of DC.jpg (more context/air around person)
 const IMG_CROP = 0.92;
