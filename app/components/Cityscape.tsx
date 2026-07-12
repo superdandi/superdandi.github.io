@@ -23,7 +23,6 @@ const COLORS = [
 export default function Cityscape() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const glowsRef = useRef<NeonGlow[]>([]);
-  const timeRef = useRef(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -54,8 +53,21 @@ export default function Cityscape() {
     };
     window.addEventListener("resize", handleResize);
 
-    const draw = () => {
-      timeRef.current += 0.01;
+    // Throttle to 24 fps (cinematic Blade Runner feel)
+    const TARGET_INTERVAL = 1000 / 24; // ~41.67ms
+    let lastDraw = 0;
+
+    const draw = (now: number) => {
+      // Skip frames to maintain target FPS
+      if (lastDraw !== 0 && now - lastDraw < TARGET_INTERVAL) {
+        requestAnimationFrame(draw);
+        return;
+      }
+      lastDraw = now;
+
+      // Use wall-clock time for frame-rate-independent animation
+      const t = now / 1000;
+
       ctx.clearRect(0, 0, w, h);
 
       // Dark gradient base
@@ -68,7 +80,7 @@ export default function Cityscape() {
 
       // Draw animated neon glows
       for (const glow of glowsRef.current) {
-        const pulse = 0.6 + 0.4 * Math.sin(timeRef.current * glow.speed + glow.phase);
+        const pulse = 0.6 + 0.4 * Math.sin(t * glow.speed + glow.phase);
         const r = glow.radius * pulse;
 
         const gradient = ctx.createRadialGradient(glow.x, glow.y, 0, glow.x, glow.y, r);
@@ -81,9 +93,9 @@ export default function Cityscape() {
         ctx.arc(glow.x, glow.y, r, 0, Math.PI * 2);
         ctx.fill();
 
-        // Slow drift
-        glow.x += Math.sin(timeRef.current * 0.2 + glow.phase) * 0.15;
-        glow.y += Math.cos(timeRef.current * 0.15 + glow.phase) * 0.05;
+        // Slow drift — frame-rate independent (uses wall-clock time)
+        glow.x += Math.sin(t * 0.2 + glow.phase) * 0.15;
+        glow.y += Math.cos(t * 0.15 + glow.phase) * 0.05;
 
         // Keep in bounds
         if (glow.x < -100) glow.x = w + 100;
@@ -95,7 +107,7 @@ export default function Cityscape() {
       requestAnimationFrame(draw);
     };
 
-    draw();
+    draw(performance.now());
 
     return () => {
       window.removeEventListener("resize", handleResize);

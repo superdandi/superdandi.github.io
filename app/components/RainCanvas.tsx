@@ -61,14 +61,29 @@ export default function RainCanvas() {
     };
     window.addEventListener("resize", handleResize);
 
-    const draw = () => {
+    // Throttle to 24 fps (cinematic Blade Runner feel)
+    const TARGET_INTERVAL = 1000 / 24; // ~41.67ms
+    let lastDraw = 0;
+
+    const draw = (now: number) => {
+      // Skip frames to maintain target FPS
+      if (lastDraw !== 0 && now - lastDraw < TARGET_INTERVAL) {
+        animRef.current = requestAnimationFrame(draw);
+        return;
+      }
+
+      // dt normalized to 60fps: 1.0 at 60fps, ~2.5 at 24fps
+      // This keeps physics speed correct regardless of render throttle
+      const dt = lastDraw === 0 ? 1 : Math.min(3, (now - lastDraw) / (1000 / 60));
+      lastDraw = now;
+
       ctx.clearRect(0, 0, w, h);
 
       // Flash from lightning
       if (flashRef.current > 0) {
         ctx.fillStyle = `rgba(180, 220, 255, ${flashRef.current * 0.06})`;
         ctx.fillRect(0, 0, w, h);
-        flashRef.current -= 0.02;
+        flashRef.current -= 0.02 * dt;
       }
 
       // Draw trails (water streaks on glass)
@@ -81,12 +96,12 @@ export default function RainCanvas() {
         ctx.moveTo(trail.x, trail.y);
         ctx.lineTo(trail.x - 2, trail.y + 20);
         ctx.stroke();
-        trail.life--;
-        trail.y += 0.3;
+        trail.life -= 1 * dt;
+        trail.y += 0.3 * dt;
       }
       trailsRef.current = trailsRef.current.filter((t) => t.life > 0);
 
-      // Spawn new trails — MAXIMALIST: more frequent, longer
+      // Spawn new trails
       if (Math.random() < 0.08 && trailsRef.current.length < 60) {
         trailsRef.current.push({
           x: Math.random() * w,
@@ -96,7 +111,7 @@ export default function RainCanvas() {
         });
       }
 
-      // Draw rain — MAXIMALIST: wider strokes, more visible
+      // Draw rain
       for (const drop of dropsRef.current) {
         ctx.strokeStyle = `rgba(150, 200, 255, ${drop.opacity})`;
         ctx.lineWidth = 1.5;
@@ -105,8 +120,8 @@ export default function RainCanvas() {
         ctx.lineTo(drop.x + drop.wind * 3, drop.y + drop.length);
         ctx.stroke();
 
-        drop.x += drop.wind;
-        drop.y += drop.speed;
+        drop.x += drop.wind * dt;
+        drop.y += drop.speed * dt;
 
         // Wrap around
         if (drop.y > h + 20) {
@@ -117,8 +132,8 @@ export default function RainCanvas() {
         if (drop.x < -10) drop.x = w + 10;
       }
 
-      // Lightning — MAXIMALIST: more frequent, brighter
-      lightningTimerRef.current--;
+      // Lightning
+      lightningTimerRef.current -= 1 * dt;
       if (lightningTimerRef.current <= 0 && Math.random() < 0.02) {
         flashRef.current = 0.8 + Math.random() * 0.5;
         lightningTimerRef.current = 100 + Math.random() * 200;
@@ -128,7 +143,7 @@ export default function RainCanvas() {
     };
 
     if (!prefersReduced) {
-      draw();
+      draw(performance.now());
     }
 
     return () => {
